@@ -2,6 +2,7 @@ const vm = Vue.createApp({
     data() {
         return {
             firstName: "John",
+            middleName: "",
             lastName: "Doe",
             url: "https://google.com",
             raw_url: '<a href="https://google.com" target="_blank">Google</a>',
@@ -9,9 +10,7 @@ const vm = Vue.createApp({
         }
     },
     methods: {
-        fullName() {
-            return `${this.firstName} ${this.lastName.toUpperCase()}`;
-        },
+
         hello() {
             return 2;
         },
@@ -21,6 +20,22 @@ const vm = Vue.createApp({
         updateLastName(msg, event) {
             console.log(msg);
             this.lastName = event.target.value;
+        },
+        updateMiddleName(event) {
+            this.middleName = event.target.value;
+        }
+    },
+    computed: {
+        fullName() {
+            console.log("Full name computed was called!");
+            return `${this.firstName} ${this.middleName} ${this.lastName.toUpperCase()}`;
+        },
+    },
+    watch: {
+        age(newValue, oldValue) {
+            setTimeout(() => {
+                this.age = 20;
+            }, 3000);
         }
     }
 }).mount('#app');
